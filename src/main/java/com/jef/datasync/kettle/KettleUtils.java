@@ -1,4 +1,4 @@
-package com.jef.kettle;
+package com.jef.datasync.kettle;
 
 import org.pentaho.di.core.KettleEnvironment;
 import org.pentaho.di.trans.Trans;
