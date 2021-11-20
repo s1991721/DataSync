@@ -2,7 +2,9 @@ package com.jef.datasync.manager;
 
 import com.jef.datasync.adapter.Adapter;
 import com.jef.datasync.base.BaseDepartment;
+import com.jef.datasync.mq.SimpleProducer;
 import com.jef.datasync.thread.Worker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -17,6 +19,10 @@ import java.util.concurrent.*;
  */
 @Component
 public class Coordinate {
+
+    @Autowired
+    private SimpleProducer producer;
+
 
     private ExecutorService executor = new ThreadPoolExecutor(1, Runtime.getRuntime().availableProcessors(),
             60L, TimeUnit.SECONDS,
@@ -64,8 +70,7 @@ public class Coordinate {
 
         //todo 切表
 
-        //todo 发送同步成功消息
-
+        producer.sendDirectMsg("同步三方数据成功");
     }
 
 

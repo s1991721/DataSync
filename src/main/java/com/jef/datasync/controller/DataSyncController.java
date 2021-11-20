@@ -29,7 +29,7 @@ public class DataSyncController {
     public String syncDataFromThird(String adapterId) {
         coordinate.startFullSync(adapterId);
 
-        producer.sendDirectMsg("同步三方数据成功");
+
         return "";
     }
 
