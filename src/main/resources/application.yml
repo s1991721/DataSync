@@ -1,4 +1,9 @@
 spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.168.98.210:3306/dataSync?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimeZone=GMT%2B8
+    username: root
+    password: 123456
   rabbitmq:
     host: 10.168.98.210
     username: admin
