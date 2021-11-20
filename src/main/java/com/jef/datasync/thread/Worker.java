@@ -10,7 +10,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * @Author: Jef
  * @Date: 2021/11/19 17:52
- * @Description
+ * @Description 部门内部处理
  */
 public class Worker implements Runnable {
 
