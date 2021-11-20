@@ -1,0 +1,12 @@
+spring:
+  rabbitmq:
+    host: 10.168.98.210
+    username: admin
+    password: admin
+    listener:
+      simple:
+        prefetch: 1
+        acknowledge-mode: manual
+      direct:
+        acknowledge-mode: manual
+    virtual-host: my_vhost
