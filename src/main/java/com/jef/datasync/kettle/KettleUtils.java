@@ -15,7 +15,7 @@ import java.util.Map;
 public class KettleUtils {
 
 
-    public static void copyFile(Map<String, String> params) throws IOException {
+    private static void copyFile(Map<String, String> params) throws IOException {
         File inFile = new File("D:\\GitHub\\DataSync\\src\\main\\resources\\test.ktr");
         FileReader fileReader = new FileReader(inFile);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -38,7 +38,7 @@ public class KettleUtils {
         fileWriter.close();
     }
 
-    public static String replaceLine(String line, Map<String, String> params) {
+    private static String replaceLine(String line, Map<String, String> params) {
 
         int a = line.indexOf("${");
         int b = line.indexOf("}$");
@@ -54,7 +54,7 @@ public class KettleUtils {
         return line;
     }
 
-    private void trans() {
+    public static void trans() {
         try {
             KettleEnvironment.init();
             TransMeta transMeta = new TransMeta("D:\\test.ktr");
@@ -67,7 +67,7 @@ public class KettleUtils {
         }
     }
 
-    private void deleteFile() {
+    private static void deleteFile() {
         File file = new File("D:\\GitHub\\DataSync\\src\\main\\resources\\test1.ktr");
         file.delete();
     }

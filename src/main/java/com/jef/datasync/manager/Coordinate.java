@@ -3,6 +3,7 @@ package com.jef.datasync.manager;
 import com.jef.datasync.adapter.Adapter;
 import com.jef.datasync.base.BaseDepartment;
 import com.jef.datasync.thread.Worker;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.concurrent.*;
  * @Date: 2021/11/18 16:44
  * @Description
  */
+@Component
 public class Coordinate {
 
     private ExecutorService executor = new ThreadPoolExecutor(1, Runtime.getRuntime().availableProcessors(),
