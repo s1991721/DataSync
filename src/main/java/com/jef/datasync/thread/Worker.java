@@ -37,6 +37,10 @@ public class Worker implements Runnable {
     }
 
     private void insertUpdateUser(BaseUser user) {
+        //todo 以用户id加锁等待
+
+
+        //todo 释放锁
 
     }
 
