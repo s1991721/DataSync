@@ -28,9 +28,7 @@ public class DataSyncController {
     @GetMapping("/syncDataFromThird")
     public String syncDataFromThird(String adapterId) {
         coordinate.startFullSync(adapterId);
-
-
-        return "";
+        return "already stared , listen to the message";
     }
 
     @GetMapping("/syncDataToService")
