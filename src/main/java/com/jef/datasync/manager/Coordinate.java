@@ -42,12 +42,17 @@ public class Coordinate {
         adapterMap.remove(adapterId);
     }
 
+    /**
+     * 选择适配器从三方同步数据
+     *
+     * @param adapterId 适配器id
+     */
     public void startFullSync(String adapterId) {
-        startSync(adapterId, "rootId");
+        new Thread(() -> startSync(adapterId, "rootId")).start();
     }
 
     public void startSubSync(String adapterId, String deptId) {
-        startSync(adapterId, deptId);
+        new Thread(() -> startSync(adapterId, deptId)).start();
     }
 
     private void startSync(String adapterId, String deptId) {
