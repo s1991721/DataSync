@@ -3,8 +3,10 @@ package com.jef.datasync.thread;
 import com.jef.datasync.adapter.Adapter;
 import com.jef.datasync.base.BaseDepartment;
 import com.jef.datasync.base.BaseUser;
+import com.jef.datasync.mapper.UserMapper;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -20,10 +22,18 @@ public class Worker implements Runnable {
 
     private CountDownLatch doneCountDownLatch;
 
-    public Worker(BaseDepartment department, Adapter adapter, CountDownLatch doneCountDownLatch) {
+    private Map locks;
+
+    private UserMapper userMapper;
+
+    private int tryCount;
+
+    public Worker(BaseDepartment department, Adapter adapter, CountDownLatch doneCountDownLatch, Map locks, UserMapper userMapper) {
         this.department = department;
         this.adapter = adapter;
         this.doneCountDownLatch = doneCountDownLatch;
+        this.locks = locks;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -37,10 +47,30 @@ public class Worker implements Runnable {
     }
 
     private void insertUpdateUser(BaseUser user) {
-        //todo 以用户id加锁等待
+        // 以用户id加锁等待
+        if (null == locks.put(user.getId(), "")) {
 
+            int effect = userMapper.updateById(user);
+            if (0 == effect) {
+                userMapper.insert(user);
+            }
+            // 释放锁
+            locks.remove(user.getId());
+        } else {
+            if (tryCount < 50) {
+                try {
+                    Thread.sleep(500);
+                    tryCount++;
+                    insertUpdateUser(user);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                // todo 报错
+            }
 
-        //todo 释放锁
+        }
+
 
     }
 
