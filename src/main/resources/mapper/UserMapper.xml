@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jef.datasync.mapper.UserMapper">
+
+    <update id="createTemplateTable">
+        CREATE TABLE t_base_user_temp LIKE t_base_user;
+    </update>
+
+    <insert id="copyDataToTemplateTable">
+        INSERT INTO t_base_user_temp
+        SELECT *
+        FROM t_base_user;
+    </insert>
+
+    <update id="deleteAllData">
+        update t_base_user_temp
+        set deleted =1
+    </update>
+
+</mapper>

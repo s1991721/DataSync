@@ -9,4 +9,11 @@ import com.jef.datasync.base.BaseDepartment;
  * @Description
  */
 public interface DepartmentMapper extends BaseMapper<BaseDepartment> {
+
+    void createTemplateTable();
+
+    int copyDataToTemplateTable();
+
+    int deleteAllData();
+
 }
