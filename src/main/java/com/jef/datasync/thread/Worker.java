@@ -2,7 +2,9 @@ package com.jef.datasync.thread;
 
 import com.jef.datasync.adapter.Adapter;
 import com.jef.datasync.base.BaseDepartment;
+import com.jef.datasync.base.BaseRelation;
 import com.jef.datasync.base.BaseUser;
+import com.jef.datasync.mapper.RelationMapper;
 import com.jef.datasync.mapper.UserMapper;
 
 import java.util.List;
@@ -26,14 +28,17 @@ public class Worker implements Runnable {
 
     private UserMapper userMapper;
 
+    private RelationMapper relationMapper;
+
     private int tryCount;
 
-    public Worker(BaseDepartment department, Adapter adapter, CountDownLatch doneCountDownLatch, Map locks, UserMapper userMapper) {
+    public Worker(BaseDepartment department, Adapter adapter, CountDownLatch doneCountDownLatch, Map locks, UserMapper userMapper, RelationMapper relationMapper) {
         this.department = department;
         this.adapter = adapter;
         this.doneCountDownLatch = doneCountDownLatch;
         this.locks = locks;
         this.userMapper = userMapper;
+        this.relationMapper = relationMapper;
     }
 
     @Override
@@ -75,7 +80,10 @@ public class Worker implements Runnable {
     }
 
     private void insertRelation(BaseUser user) {
-
+        BaseRelation relation = new BaseRelation();
+        relation.setDepartmentId(department.getId());
+        relation.setUserId(user.getId());
+        relationMapper.insert(relation);
     }
 
 }
