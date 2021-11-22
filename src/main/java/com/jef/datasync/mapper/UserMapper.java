@@ -22,4 +22,5 @@ public interface UserMapper extends BaseMapper<BaseUser> {
 
     void deleteTable();
 
+    void cleanTempData();
 }

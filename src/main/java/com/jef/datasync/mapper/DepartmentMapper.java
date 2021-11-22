@@ -22,4 +22,6 @@ public interface DepartmentMapper extends BaseMapper<BaseDepartment> {
 
     void deleteTable();
 
+    void cleanTempData();
+
 }

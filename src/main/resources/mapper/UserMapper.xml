@@ -34,4 +34,10 @@
     <update id="deleteTable">
         drop table t_base_user_deleting
     </update>
+
+    <delete id="cleanTempData">
+        delete
+        from t_base_user_temp
+        where deleted = 1
+    </delete>
 </mapper>

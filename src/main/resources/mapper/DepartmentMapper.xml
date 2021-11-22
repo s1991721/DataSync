@@ -34,4 +34,10 @@
         drop table t_base_department_deleting
     </update>
 
+    <delete id="cleanTempData">
+        delete
+        from t_base_department_temp
+        where deleted = 1
+    </delete>
+
 </mapper>
