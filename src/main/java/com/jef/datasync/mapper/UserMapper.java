@@ -16,4 +16,10 @@ public interface UserMapper extends BaseMapper<BaseUser> {
 
     int deleteAllData();
 
+    void invalid();
+
+    void effect(String newTableName);
+
+    void deleteTable();
+
 }

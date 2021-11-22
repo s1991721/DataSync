@@ -17,4 +17,21 @@
         set deleted =1
     </update>
 
+    <update id="invalid">
+        rename
+        table  t_base_department to t_base_department_deleting
+    </update>
+
+    <update id="effect">
+        rename
+        table
+        ${newTableName}
+        to
+        t_base_department
+    </update>
+
+    <update id="deleteTable">
+        drop table t_base_department_deleting
+    </update>
+
 </mapper>

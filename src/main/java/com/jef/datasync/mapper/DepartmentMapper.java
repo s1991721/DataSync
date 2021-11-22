@@ -16,4 +16,10 @@ public interface DepartmentMapper extends BaseMapper<BaseDepartment> {
 
     int deleteAllData();
 
+    void invalid();
+
+    void effect(String newTableName);
+
+    void deleteTable();
+
 }
