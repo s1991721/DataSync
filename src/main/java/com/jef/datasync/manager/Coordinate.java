@@ -1,6 +1,7 @@
 package com.jef.datasync.manager;
 
 import com.jef.datasync.adapter.Adapter;
+import com.jef.datasync.adapter.BaseAdapter;
 import com.jef.datasync.base.BaseDepartment;
 import com.jef.datasync.mapper.DepartmentMapper;
 import com.jef.datasync.mapper.RelationMapper;
@@ -35,6 +36,9 @@ public class Coordinate {
     @Autowired
     private RelationMapper relationMapper;
 
+    @Autowired
+    private NotifyManager notifyManager;
+
 
     //内存锁
     private static Map<String, String> locks = new ConcurrentHashMap<>();
@@ -50,7 +54,8 @@ public class Coordinate {
         return adapterMap.get(adapterId);
     }
 
-    public void setAdapter(Adapter adapter) {
+    public void setAdapter(BaseAdapter adapter) {
+        adapter.setNotifyManager(notifyManager);
         adapterMap.put(adapter.getId(), adapter);
     }
 

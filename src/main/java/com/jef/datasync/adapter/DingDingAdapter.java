@@ -10,7 +10,7 @@ import java.util.List;
  * @Date: 2021/11/18 16:29
  * @Description 默认钉钉实现
  */
-public class DingDingAdapter implements Adapter {
+public class DingDingAdapter extends BaseAdapter {
     @Override
     public String getId() {
         return "DingDingAdapter";
@@ -29,5 +29,6 @@ public class DingDingAdapter implements Adapter {
     @Override
     public void onDataChange(String dataJson) {
         System.out.println("有数据变更" + dataJson);
+        getNotifyManager().sendThirdDataChangeMsg(dataJson);
     }
 }

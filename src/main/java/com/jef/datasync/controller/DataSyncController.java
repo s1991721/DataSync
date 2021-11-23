@@ -1,5 +1,6 @@
 package com.jef.datasync.controller;
 
+import com.jef.datasync.adapter.Adapter;
 import com.jef.datasync.kettle.KettleUtils;
 import com.jef.datasync.manager.Coordinate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,15 @@ public class DataSyncController {
     public String syncDataFromThird(String adapterId) {
         coordinate.startFullSync(adapterId);
         return "syncDataFromThird already stared , listen to the message";
+    }
+
+    @GetMapping("/syncDataFromThird")
+    public String notifyFromThird(String url) {
+        //todo 处理url识别为具体适配器
+        String adapterId = url;
+        Adapter adapter = coordinate.getAdapter(adapterId);
+        adapter.onDataChange(url);
+        return "";
     }
 
     @GetMapping("/syncDataToService")
