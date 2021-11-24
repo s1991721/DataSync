@@ -33,7 +33,7 @@ public class DataSyncController {
         return "syncDataFromThird already stared , listen to the message";
     }
 
-    @GetMapping("/syncDataFromThird")
+    @GetMapping("/notifyFromThird")
     public String notifyFromThird(String url) {
         //todo 处理url识别为具体适配器
         String adapterId = url;
