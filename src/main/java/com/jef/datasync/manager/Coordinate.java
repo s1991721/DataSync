@@ -68,15 +68,32 @@ public class Coordinate {
      *
      * @param adapterId 适配器id
      */
-    public void startFullSync(String adapterId) {
-        new Thread(() -> startSync(adapterId, "rootId")).start();
+    public boolean startFullSync(String adapterId) {
+        Adapter adapter = getAdapter(adapterId);
+        if (null == adapter) {
+            return false;
+        } else {
+            new Thread(() -> startSync(adapter, "rootId")).start();
+            return true;
+        }
     }
 
-    public void startSubSync(String adapterId, String deptId) {
-        new Thread(() -> startSync(adapterId, deptId)).start();
+    public boolean startSubSync(String adapterId, String deptId) {
+        Adapter adapter = getAdapter(adapterId);
+        if (null == adapter) {
+            return false;
+        } else {
+            new Thread(() -> startSync(adapter, deptId)).start();
+            return true;
+        }
     }
 
-    private void startSync(String adapterId, String deptId) {
+    private void startSync(Adapter adapter, String deptId) {
+        if (null == adapter) {
+            //todo 错误信息
+            return;
+        }
+
         try {
             copyData();
         } catch (Exception e) {
@@ -87,7 +104,7 @@ public class Coordinate {
         }
 
         try {
-            enteringData(adapterId, deptId);
+            enteringData(adapter, deptId);
         } catch (Exception e) {
             //三方数据落库出错
             e.printStackTrace();
@@ -144,9 +161,8 @@ public class Coordinate {
         System.out.println(deptCount + userCount);
     }
 
-    private void enteringData(String adapterId, String deptId) throws Exception {
+    private void enteringData(Adapter adapter, String deptId) throws Exception {
 
-        Adapter adapter = getAdapter(adapterId);
         List<BaseDepartment> departmentList = adapter.getDepartmentList(deptId);
 
         // 组织数据落库

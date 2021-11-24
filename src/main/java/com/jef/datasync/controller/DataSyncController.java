@@ -29,8 +29,12 @@ public class DataSyncController {
 
     @GetMapping("/syncDataFromThird")
     public String syncDataFromThird(String adapterId) {
-        coordinate.startFullSync(adapterId);
-        return "syncDataFromThird already stared , listen to the message";
+        boolean isEffect = coordinate.startFullSync(adapterId);
+        if (isEffect) {
+            return "syncDataFromThird already stared , listen to the message";
+        } else {
+            return "something wrong !!!";
+        }
     }
 
     @GetMapping("/notifyFromThird")
