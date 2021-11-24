@@ -25,14 +25,14 @@ public class DingDingAdapter extends BaseAdapter {
         department.setParentId("0");
 
         BaseDepartment department1 = new BaseDepartment();
-        department.setName("子部门1");
-        department.setId("A1");
-        department.setParentId("A");
+        department1.setName("子部门1");
+        department1.setId("A1");
+        department1.setParentId("A");
 
         BaseDepartment department2 = new BaseDepartment();
-        department.setName("子部门2");
-        department.setId("A2");
-        department.setParentId("A");
+        department2.setName("子部门2");
+        department2.setId("A2");
+        department2.setParentId("A");
 
         List<BaseDepartment> list = new ArrayList<>(3);
         list.add(department);
@@ -52,8 +52,8 @@ public class DingDingAdapter extends BaseAdapter {
             user.setName("张三");
 
             BaseUser user1 = new BaseUser();
-            user.setId("222");
-            user.setName("李四");
+            user1.setId("222");
+            user1.setName("李四");
 
             list.add(user);
             list.add(user1);
