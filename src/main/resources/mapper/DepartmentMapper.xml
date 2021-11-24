@@ -3,23 +3,23 @@
 <mapper namespace="com.jef.datasync.mapper.DepartmentMapper">
 
     <update id="createTemplateTable">
-        CREATE TABLE t_base_department_temp LIKE t_base_department;
+        CREATE TABLE base_department_temp LIKE base_department;
     </update>
 
     <insert id="copyDataToTemplateTable">
-        INSERT INTO t_base_department_temp
+        INSERT INTO base_department_temp
         SELECT *
-        FROM t_base_department;
+        FROM base_department;
     </insert>
 
     <update id="deleteAllData">
-        update t_base_department_temp
+        update base_department_temp
         set deleted =1
     </update>
 
     <update id="invalid">
         rename
-        table  t_base_department to t_base_department_deleting
+        table  base_department to base_department_deleting
     </update>
 
     <update id="effect">
@@ -27,16 +27,16 @@
         table
         ${newTableName}
         to
-        t_base_department
+        base_department
     </update>
 
     <update id="deleteTable">
-        drop table t_base_department_deleting
+        drop table base_department_deleting
     </update>
 
     <delete id="cleanTempData">
         delete
-        from t_base_department_temp
+        from base_department_temp
         where deleted = 1
     </delete>
 

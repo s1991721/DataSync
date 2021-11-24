@@ -2,6 +2,7 @@ package com.jef.datasync.manager;
 
 import com.jef.datasync.adapter.Adapter;
 import com.jef.datasync.adapter.BaseAdapter;
+import com.jef.datasync.adapter.DingDingAdapter;
 import com.jef.datasync.base.BaseDepartment;
 import com.jef.datasync.mapper.DepartmentMapper;
 import com.jef.datasync.mapper.RelationMapper;
@@ -39,6 +40,9 @@ public class Coordinate {
     @Autowired
     private NotifyManager notifyManager;
 
+    public Coordinate() {
+        setAdapter(new DingDingAdapter());
+    }
 
     //内存锁
     private static Map<String, String> locks = new ConcurrentHashMap<>();
@@ -198,9 +202,9 @@ public class Coordinate {
         try {
 
             departmentMapper.invalid();
-            departmentMapper.effect("t_base_department_temp");
+            departmentMapper.effect("base_department_temp");
             userMapper.invalid();
-            userMapper.effect("t_base_department_temp");
+            userMapper.effect("base_user_temp");
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

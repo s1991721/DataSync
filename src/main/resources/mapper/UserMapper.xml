@@ -3,24 +3,24 @@
 <mapper namespace="com.jef.datasync.mapper.UserMapper">
 
     <update id="createTemplateTable">
-        CREATE TABLE t_base_user_temp LIKE t_base_user;
+        CREATE TABLE base_user_temp LIKE base_user;
     </update>
 
     <insert id="copyDataToTemplateTable">
-        INSERT INTO t_base_user_temp
+        INSERT INTO base_user_temp
         SELECT *
-        FROM t_base_user;
+        FROM base_user;
     </insert>
 
     <update id="deleteAllData">
-        update t_base_user_temp
+        update base_user_temp
         set deleted =1
     </update>
 
 
     <update id="invalid">
         rename
-        table  t_base_user to t_base_user_deleting
+        table  base_user to base_user_deleting
     </update>
 
     <update id="effect">
@@ -28,16 +28,16 @@
         table
         ${newTableName}
         to
-        t_base_user
+        base_user
     </update>
 
     <update id="deleteTable">
-        drop table t_base_user_deleting
+        drop table base_user_deleting
     </update>
 
     <delete id="cleanTempData">
         delete
-        from t_base_user_temp
+        from base_user_temp
         where deleted = 1
     </delete>
 </mapper>
