@@ -46,7 +46,6 @@ public class Worker implements Runnable {
         List<BaseUser> userList = adapter.getUserList(department.getId());
         for (BaseUser user : userList) {
             insertUpdateUser(user);
-            insertRelation(user);
         }
         doneCountDownLatch.countDown();
     }
@@ -59,6 +58,7 @@ public class Worker implements Runnable {
             if (0 == effect) {
                 userMapper.insert(user);
             }
+            insertRelation(user);
             // 释放锁
             locks.remove(user.getId());
         } else {
@@ -75,7 +75,6 @@ public class Worker implements Runnable {
             }
 
         }
-
 
     }
 

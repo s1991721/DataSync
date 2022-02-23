@@ -116,6 +116,7 @@ public class Coordinate {
             return;
         }
 
+        //清理同步已经失效的数据
         cleanData();
 
         // 切表
@@ -160,6 +161,13 @@ public class Coordinate {
             //todo 复制数据出错
         }
 
+        //部门员工关系处理
+        try {
+            relationMapper.createTemplateTable();
+        } catch (Exception e) {
+            //todo 表已存在
+        }
+
         int userCount = userMapper.deleteAllData();
 
         System.out.println(deptCount + userCount);
@@ -171,9 +179,9 @@ public class Coordinate {
 
         // 组织数据落库
         for (BaseDepartment department : departmentList) {
-            int effect = departmentMapper.updateById(department);
+            int effect = departmentMapper.updateById( department);
             if (0 == effect) {
-                departmentMapper.insert(department);
+                departmentMapper.insert( department);
             }
         }
 
@@ -205,6 +213,9 @@ public class Coordinate {
             departmentMapper.effect("base_department_temp");
             userMapper.invalid();
             userMapper.effect("base_user_temp");
+            relationMapper.invalid();
+            relationMapper.effect("base_relation_temp");
+
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -213,6 +224,7 @@ public class Coordinate {
         //todo 释放锁
         departmentMapper.deleteTable();
         userMapper.deleteTable();
+        relationMapper.deleteTable();
     }
 
 }

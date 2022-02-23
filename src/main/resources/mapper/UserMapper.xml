@@ -40,4 +40,15 @@
         from base_user_temp
         where deleted = 1
     </delete>
+
+    <update id="deleteAllData">
+        update base_user_temp
+        set deleted =1
+    </update>
+
+    <delete id="cleanTempData">
+        delete
+        from base_user_temp
+        where deleted = 1
+    </delete>
 </mapper>

@@ -15,3 +15,7 @@ spring:
       direct:
         acknowledge-mode: manual
     virtual-host: my_vhost
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

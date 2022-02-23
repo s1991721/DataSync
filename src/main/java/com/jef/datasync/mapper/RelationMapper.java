@@ -9,4 +9,13 @@ import com.jef.datasync.base.BaseRelation;
  * @Description
  */
 public interface RelationMapper extends BaseMapper<BaseRelation> {
+
+    void createTemplateTable();
+
+    void invalid();
+
+    void effect(String newTableName);
+
+    void deleteTable();
+
 }

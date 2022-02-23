@@ -14,13 +14,14 @@ public interface UserMapper extends BaseMapper<BaseUser> {
 
     int copyDataToTemplateTable();
 
-    int deleteAllData();
-
     void invalid();
 
     void effect(String newTableName);
 
     void deleteTable();
 
+    int deleteAllData();
+
     void cleanTempData();
+
 }
